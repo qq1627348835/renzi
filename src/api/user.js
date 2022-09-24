@@ -1,7 +1,4 @@
-import request from '@/utils/request'
-
-export function login(data) {
-}
+// import request from '@/utils/request'
 
 export function getInfo(token) {
 }
