@@ -15,7 +15,7 @@
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input ref="pwd" v-model="loginForm.password" :type="passwordType" />
+        <el-input ref="pwd" v-model="loginForm.mobile" :type="passwordType" />
         <span class="svg-container">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPwd" />
         </span>
@@ -84,6 +84,7 @@ export default {
         await this.$refs.loginForm.validate()
         this.loading = true
         await this.$store.dispatch('user/loginAction', this.loginForm)
+        this.$router.push('/')
       } finally {
         this.loading = false
       }
