@@ -40,7 +40,7 @@ service.interceptors.response.use(response => {
   Message.error(message)
   return Promise.reject(new Error(message))
 }, error => {
-  console.log(error.response)
+  // console.log(error.response)
   if (error.response?.status === 401) {
     store.dispatch('user/logout')
     router.push('/login')
