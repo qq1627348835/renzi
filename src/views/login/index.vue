@@ -15,7 +15,7 @@
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input ref="pwd" v-model="loginForm.mobile" :type="passwordType" />
+        <el-input ref="pwd" v-model="loginForm.password" :type="passwordType" />
         <span class="svg-container">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPwd" />
         </span>
@@ -72,6 +72,7 @@ export default {
       }
     }
   },
+
   methods: {
     showPwd() {
       this.passwordType === 'password' ? this.passwordType = '' : this.passwordType = 'password'

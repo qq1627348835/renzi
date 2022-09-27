@@ -14,6 +14,10 @@ export default {
       'name'
     ])
   }
+  // created() {
+  //   const res = this.$store.dispatch('user/getUserInfo')
+  //   console.log(res)
+  // }
 }
 </script>
 
