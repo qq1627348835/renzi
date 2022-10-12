@@ -21,6 +21,8 @@ Object.keys(directives).forEach(ele => {
   Vue.directive(ele, directives[ele])
 })
 
+import components from '@/components'
+Vue.use(components)
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
