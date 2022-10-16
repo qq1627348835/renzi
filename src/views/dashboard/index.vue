@@ -1,17 +1,18 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
-    <UploadExce :before-upload="beforeUpload" :on-success="handleSuccess" />
+    <UploadImg @on-success="onSuccess1" />
+    <UploadImg @on-success="onSuccess2" />
+
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import UploadExce from '@/components/UploadExce/index.vue'
+import UploadImg from '@/components/UploadImg/index.vue'
 
 export default {
   name: 'Dashboard',
-  components: { UploadExce },
+  components: { UploadImg },
   computed: {
     ...mapGetters([
       'name'
@@ -21,12 +22,11 @@ export default {
   //   console.log(res)
   // }
   methods: {
-    handleSuccess(data) {
-      console.log('data', data)
+    onSuccess1(val) {
+      console.log(val)
     },
-    beforeUpload(file) {
-      console.log(file)
-      return true
+    onSuccess2(val) {
+      console.log(val)
     }
   }
 }

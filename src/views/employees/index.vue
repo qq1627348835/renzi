@@ -15,6 +15,11 @@
     <el-card>
       <el-table v-loading="loading" border :data="list">
         <el-table-column label="序号" sortable="" width="80" type="index" />
+        <el-table-column label="姓名" prop="staffPhoto">
+          <template slot-scope="{ row }">
+            <img style="width: 10opx;height: 100px;" :src="row.staffPhoto" alt="" @click="genQrCode(row.staffPhoto)">
+          </template>
+        </el-table-column>
         <el-table-column label="姓名" prop="username" />
         <el-table-column label="工号" prop="workNumber" />
         <el-table-column
@@ -60,6 +65,13 @@
       </el-row>
     </el-card>
     <add-employee :dialog-visible.sync="dialogVisible" />
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisibleQrCode"
+      width="30%"
+    >
+      <canvas ref="canvas" />
+    </el-dialog>
   </div>
 </template>
 
@@ -68,6 +80,7 @@
 import EnumHireType from '@/api/constant/employees'
 import { getEmployeeList, delEmployee } from '@/api/employees'
 import addEmployee from './cpns/add-employee.vue'
+import QRCode from 'qrcode'
 export default {
   name: 'Employees',
   components: { addEmployee },
@@ -82,7 +95,8 @@ export default {
       total: 0,
       loading: false,
       hireType: EnumHireType.hireType,
-      dialogVisible: false
+      dialogVisible: false,
+      dialogVisibleQrCode: false
     }
   },
   mounted() {
@@ -161,6 +175,16 @@ export default {
     },
     goDetail(row) {
       this.$router.push('/employees/detail/' + row.id)
+    },
+    genQrCode(staffPhoto) {
+      if (!staffPhoto) this.$message.error('暂无头像')
+      this.dialogVisibleQrCode = true
+      this.$nextTick(() => {
+        QRCode.toCanvas(this.$refs.canvas, staffPhoto, function(error) {
+          if (error) console.log(error)
+          console.log('success!')
+        })
+      })
     }
   }
 }
